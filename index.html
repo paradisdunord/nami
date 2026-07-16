@@ -6,75 +6,180 @@
     <title>Pet Profile | Lost & Found</title>
     <meta
       name="description"
-      content="A simple, phone-friendly pet profile page for sharing important details if your pet is lost."
+      content="A polished, phone-friendly pet profile page for sharing important details if your pet is lost."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <main class="page">
-      <section class="card">
-        <header class="hero">
-          <div class="hero-copy">
-            <p class="eyebrow">Lost pet profile</p>
-            <h1>Buddy</h1>
-            <p class="lead">
-              A gentle, affectionate dog currently missing and looking for a
-              safe way home.
-            </p>
-          </div>
+      <section class="profile-card" aria-label="Buddy pet profile">
+        <div class="accent-orb"></div>
 
-          <div class="hero-media">
-            <img src="images/nami.jpg" alt="Buddy the pet" />
-            <div class="hero-note">
-              <span class="hero-icon">⚠</span>
-              <div>
-                <strong>Last seen</strong>
-                <p>Near the river trail at dusk</p>
+        <div class="card-shell">
+          <header class="hero">
+            <div class="hero-copy">
+              <h1>Nami</h1>
+              <p class="breed">Pomsky (Pomeranian X Siberian Husky)</p>
+              <p class="lead">
+                A friendly companion with a playful temperament and a bright,
+                curious personality.
+              </p>
+            </div>
+
+            <div class="hero-media">
+              <img src="images/nami.jpg" alt="Nami the pet" />
+
+              <script>
+                const lastSeenConfig = {
+                  enabled: false,
+                  title: 'Last seen',
+                  text: 'Near the river trail at dusk'
+                };
+
+                function setLastSeenVisible(visible) {
+                  const block = document.getElementById('internal-last-seen-block');
+                  if (!block) return;
+                  block.style.display = visible ? 'flex' : 'none';
+                }
+
+                function updateLastSeenContent() {
+                  const block = document.getElementById('internal-last-seen-block');
+                  if (!block) return;
+
+                  const title = block.querySelector('strong');
+                  const message = block.querySelector('p');
+
+                  if (title) title.textContent = lastSeenConfig.title;
+                  if (message) message.textContent = lastSeenConfig.text;
+
+                  setLastSeenVisible(lastSeenConfig.enabled);
+                }
+
+                document.addEventListener('DOMContentLoaded', updateLastSeenContent);
+              </script>
+
+              <!-- INTERNAL ONLY: edit lastSeenConfig above to change the text or visibility -->
+              <div class="hero-note" id="internal-last-seen-block">
+                <span class="hero-icon">⚠</span>
+                <div>
+                  <strong>Last seen</strong>
+                  <p>Near the river trail at dusk</p>
+                </div>
               </div>
             </div>
-          </div>
-        </header>
+          </header>
 
-        <div class="status">Please contact me immediately if you see Buddy.</div>
+          <section class="details-section" aria-label="Pet information">
+            <h2>Information</h2>
+            <div class="details-list">
+              
 
-        <section class="details-grid">
-          <article class="panel">
-            <h2>Essential details</h2>
-            <ul>
-              <li><strong>Name:</strong> Buddy</li>
-              <li><strong>Type:</strong> Dog</li>
-              <li><strong>Breed:</strong> Mixed breed</li>
-              <li><strong>Age:</strong> 3 years</li>
-              <li><strong>Color:</strong> Brown and white</li>
-            </ul>
-          </article>
+              <div class="detail-row">
+                <p class="detail-label">Sex</p>
+                <p class="detail-value">Female</p>
+              </div>
 
-          <article class="panel">
-            <h2>Care notes</h2>
-            <ul>
-              <li><strong>Microchip:</strong> Not registered yet</li>
-              <li><strong>Collar:</strong> Blue collar with tag</li>
-              <li><strong>Weight:</strong> Around 18 kg</li>
-              <li><strong>Behavior:</strong> Friendly, shy with strangers</li>
-            </ul>
-          </article>
-        </section>
+              <div class="detail-row">
+                <p class="detail-label">Age</p>
+                <p class="detail-value" id="age-display" data-birth-date="2026-03-24">Calculating…</p>
+              </div>
+              <div class="detail-row">
+                <p class="detail-label">Colour</p>
+                <p class="detail-value">Salt and pepper</p>
+              </div>
+              <div class="detail-row">
+                <p class="detail-label">Weight</p>
+                <p class="detail-value">Around 7kg</p>
+              </div>
+              <div class="detail-row">
+                <p class="detail-label">Spayed</p>
+                <p class="detail-value">No</p>
+              </div>
+              <div class="detail-row">
+                <p class="detail-label">Microchip number</p>
+                <p class="detail-value">956000016973905</p>
+              </div>
+              <div class="detail-row">
+                <p class="detail-label">External tag number</p>
+                <p class="detail-value">2572001</p>
+              </div>
+                <div class="detail-row">
+                <p class="detail-label">Registration</p>
+                <p class="detail-value">00000</p>
+              </div>
+              <div class="detail-row">
+                <p class="detail-label">Veterinarian</p>
+                <p class="detail-value">All Paws Veterinary Clinic</p>
+              </div>
+            </div>
 
-        <section class="contact-panel">
-          <h2>Contact</h2>
-          <p>If you found Buddy, please call or message:</p>
-          <div class="contact-actions">
-            <a href="tel:+1234567890">+1 (234) 567-890</a>
-            <a href="mailto:owner@example.com">owner@example.com</a>
-          </div>
-        </section>
+            <div class="care-note-card">
+              <p class="detail-label">Care note</p>
+              <p class="detail-value">
+                Avoid table food, she'll eat a carrot if you have some.
+              </p>
+            </div>
+          </section>
+
+          <section class="contact-panel">
+            <h2>Contact</h2>
+            <p>If you found Nami, please call or message:</p>
+            <div class="contact-actions">
+              <a href="tel:+15149479338">Call Kaël</a>
+              <a href="tel:+14389246183">Call Maurine</a>
+            </div>
+          </section>
+        </div>
       </section>
     </main>
+    <script>
+      function getApproximateAge(birthDateString) {
+        if (!birthDateString) return 'Unknown';
+
+        const birthDate = new Date(birthDateString);
+        const today = new Date();
+
+        if (Number.isNaN(birthDate.getTime())) return 'Unknown';
+
+        let years = today.getFullYear() - birthDate.getFullYear();
+        let months = today.getMonth() - birthDate.getMonth();
+        let days = today.getDate() - birthDate.getDate();
+
+        if (days < 0) {
+          months -= 1;
+        }
+
+        if (months < 0) {
+          years -= 1;
+          months += 12;
+        }
+
+        if (years > 0) {
+          return `${years} ${years === 1 ? 'year' : 'years'} old`;
+        }
+
+        if (months > 0) {
+          return `${months} ${months === 1 ? 'month' : 'months'} old`;
+        }
+
+        return `${Math.max(0, days)} ${days === 1 ? 'day' : 'days'} old`;
+      }
+
+      function updateAgeDisplay() {
+        const ageDisplay = document.getElementById('age-display');
+        if (!ageDisplay) return;
+
+        const birthDate = ageDisplay.getAttribute('data-birth-date');
+        ageDisplay.textContent = getApproximateAge(birthDate);
+      }
+
+      document.addEventListener('DOMContentLoaded', updateAgeDisplay);
+    </script>
   </body>
 </html>
