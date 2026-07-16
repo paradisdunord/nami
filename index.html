@@ -44,15 +44,6 @@
                   decoding="async"
                 />
               </picture>
-
-              <!-- INTERNAL ONLY: edit lastSeenConfig below to change the text or visibility -->
-              <div class="hero-note" id="internal-last-seen-block">
-                <span class="hero-icon">⚠</span>
-                <div>
-                  <strong id="last-seen-title">Last seen</strong>
-                  <p id="last-seen-text">Near the river trail at dusk</p>
-                </div>
-              </div>
             </div>
           </header>
 
@@ -119,12 +110,6 @@
     </main>
 
     <script>
-      const lastSeenConfig = {
-        enabled: false,
-        title: 'Last seen',
-        text: 'Near the river trail at dusk'
-      };
-
       function getApproximateAge(birthDateString) {
         if (!birthDateString) return 'Unknown';
 
@@ -165,22 +150,8 @@
         ageDisplay.textContent = getApproximateAge(birthDate);
       }
 
-      function updateLastSeen() {
-        const block = document.getElementById('internal-last-seen-block');
-        if (!block) return;
-
-        const titleEl = document.getElementById('last-seen-title');
-        const textEl = document.getElementById('last-seen-text');
-
-        if (titleEl) titleEl.textContent = lastSeenConfig.title;
-        if (textEl) textEl.textContent = lastSeenConfig.text;
-
-        block.style.display = lastSeenConfig.enabled ? 'flex' : 'none';
-      }
-
       document.addEventListener('DOMContentLoaded', () => {
         updateAgeDisplay();
-        updateLastSeen();
       });
     </script>
   </body>
