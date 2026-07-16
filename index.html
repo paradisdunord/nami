@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="googlebot" content="noindex, nofollow" />
     <title>Nami the Pomsky</title>
     <meta
       name="description"
@@ -11,14 +13,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <main class="page">
-      <section class="profile-card" aria-label="pet profile">
+      <section class="profile-card" aria-label="Nami pet profile">
         <div class="accent-orb"></div>
 
         <div class="card-shell">
@@ -33,43 +35,22 @@
             </div>
 
             <div class="hero-media">
-              <img src="images/nami.jpg" alt="Nami the pet" />
+              <picture>
+                <source srcset="images/nami.webp" type="image/webp" />
+                <img
+                  src="images/nami.jpg"
+                  alt="Nami the pet"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
 
-              <script>
-                const lastSeenConfig = {
-                  enabled: false,
-                  title: 'Last seen',
-                  text: 'Near the river trail at dusk'
-                };
-
-                function setLastSeenVisible(visible) {
-                  const block = document.getElementById('internal-last-seen-block');
-                  if (!block) return;
-                  block.style.display = visible ? 'flex' : 'none';
-                }
-
-                function updateLastSeenContent() {
-                  const block = document.getElementById('internal-last-seen-block');
-                  if (!block) return;
-
-                  const title = block.querySelector('strong');
-                  const message = block.querySelector('p');
-
-                  if (title) title.textContent = lastSeenConfig.title;
-                  if (message) message.textContent = lastSeenConfig.text;
-
-                  setLastSeenVisible(lastSeenConfig.enabled);
-                }
-
-                document.addEventListener('DOMContentLoaded', updateLastSeenContent);
-              </script>
-
-              <!-- INTERNAL ONLY: edit lastSeenConfig above to change the text or visibility -->
+              <!-- INTERNAL ONLY: edit lastSeenConfig below to change the text or visibility -->
               <div class="hero-note" id="internal-last-seen-block">
                 <span class="hero-icon">⚠</span>
                 <div>
-                  <strong>Last seen</strong>
-                  <p>Near the river trail at dusk</p>
+                  <strong id="last-seen-title">Last seen</strong>
+                  <p id="last-seen-text">Near the river trail at dusk</p>
                 </div>
               </div>
             </div>
@@ -78,8 +59,6 @@
           <section class="details-section" aria-label="Pet information">
             <h2>Information</h2>
             <div class="details-list">
-              
-
               <div class="detail-row">
                 <p class="detail-label">Sex</p>
                 <p class="detail-value">Female</p>
@@ -109,7 +88,7 @@
                 <p class="detail-label">External tag number</p>
                 <p class="detail-value">2572001</p>
               </div>
-                <div class="detail-row">
+              <div class="detail-row">
                 <p class="detail-label">Registration</p>
                 <p class="detail-value">00000</p>
               </div>
@@ -138,7 +117,14 @@
         </div>
       </section>
     </main>
+
     <script>
+      const lastSeenConfig = {
+        enabled: false,
+        title: 'Last seen',
+        text: 'Near the river trail at dusk'
+      };
+
       function getApproximateAge(birthDateString) {
         if (!birthDateString) return 'Unknown';
 
@@ -179,7 +165,23 @@
         ageDisplay.textContent = getApproximateAge(birthDate);
       }
 
-      document.addEventListener('DOMContentLoaded', updateAgeDisplay);
+      function updateLastSeen() {
+        const block = document.getElementById('internal-last-seen-block');
+        if (!block) return;
+
+        const titleEl = document.getElementById('last-seen-title');
+        const textEl = document.getElementById('last-seen-text');
+
+        if (titleEl) titleEl.textContent = lastSeenConfig.title;
+        if (textEl) textEl.textContent = lastSeenConfig.text;
+
+        block.style.display = lastSeenConfig.enabled ? 'flex' : 'none';
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        updateAgeDisplay();
+        updateLastSeen();
+      });
     </script>
   </body>
 </html>
