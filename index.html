@@ -73,15 +73,39 @@
               </div>
               <div class="detail-row">
                 <p class="detail-label">Microchip number</p>
-                <p class="detail-value">956000016973905</p>
+                <div class="detail-value-with-copy">
+                  <p class="detail-value">956000016973905</p>
+                  <button class="copy-btn" data-copy-text="956000016973905" aria-label="Copy microchip number" title="Copy to clipboard">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M3 1h8v3h2V1c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v8c0 .55.45 1 1 1h3v-2H3V1z" fill="currentColor"/>
+                      <path d="M6 4h8v8H6z" fill="currentColor"/>
+                    </svg>
+                  </button>
+                </div>
               </div>
               <div class="detail-row">
                 <p class="detail-label">External tag number</p>
-                <p class="detail-value">2572001</p>
+                <div class="detail-value-with-copy">
+                  <p class="detail-value">2572001</p>
+                  <button class="copy-btn" data-copy-text="2572001" aria-label="Copy external tag number" title="Copy to clipboard">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M3 1h8v3h2V1c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v8c0 .55.45 1 1 1h3v-2H3V1z" fill="currentColor"/>
+                      <path d="M6 4h8v8H6z" fill="currentColor"/>
+                    </svg>
+                  </button>
+                </div>
               </div>
               <div class="detail-row">
                 <p class="detail-label">Whitehorse licence</p>
-                <p class="detail-value">#Y-120</p>
+                <div class="detail-value-with-copy">
+                  <p class="detail-value">#Y-120</p>
+                  <button class="copy-btn" data-copy-text="#Y-120" aria-label="Copy licence number" title="Copy to clipboard">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M3 1h8v3h2V1c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v8c0 .55.45 1 1 1h3v-2H3V1z" fill="currentColor"/>
+                      <path d="M6 4h8v8H6z" fill="currentColor"/>
+                    </svg>
+                  </button>
+                </div>
               </div>
               <div class="detail-row">
                 <p class="detail-label">Veterinarian</p>
@@ -150,8 +174,32 @@
         ageDisplay.textContent = getApproximateAge(birthDate);
       }
 
+      function setupCopyButtons() {
+        const copyButtons = document.querySelectorAll('.copy-btn');
+        copyButtons.forEach(button => {
+          button.addEventListener('click', async (e) => {
+            e.preventDefault();
+            const textToCopy = button.getAttribute('data-copy-text');
+            try {
+              await navigator.clipboard.writeText(textToCopy);
+              
+              // Visual feedback
+              const originalSvg = button.innerHTML;
+              button.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 8L6 11.5l7.5-7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+              
+              setTimeout(() => {
+                button.innerHTML = originalSvg;
+              }, 1500);
+            } catch (err) {
+              console.error('Failed to copy:', err);
+            }
+          });
+        });
+      }
+
       document.addEventListener('DOMContentLoaded', () => {
         updateAgeDisplay();
+        setupCopyButtons();
       });
     </script>
   </body>
